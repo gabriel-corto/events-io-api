@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "events" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "location" TEXT NOT NULL,
+    "publishedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
