@@ -18,3 +18,14 @@ model Events {
 
   @@map("events")
 }
+
+model Tickets {
+  id        Int      @id @default(autoincrement())
+  slug      String?  @unique
+  name      String
+  quantity  Int
+  location  String
+  appliedAt DateTime @default(now())
+
+  @@map("tickets")
+}
