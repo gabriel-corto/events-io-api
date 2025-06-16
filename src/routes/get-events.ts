@@ -1,13 +1,6 @@
-import { prisma } from '@/lib/prisma'
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+import { GetEventController } from '@/controllers/get-events'
 
 export const getEventsRouter = Router()
 
-getEventsRouter.get('/events', async (req: Request, res: Response) => {
-  const events = await prisma.events.findMany()
-
-  res.status(200).json({
-    success: true,
-    content: events,
-  })
-})
+getEventsRouter.get('/events', GetEventController)

@@ -119,6 +119,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.EventsScalarFieldEnum = {
   id: 'id',
+  ticket: 'ticket',
+  slug: 'slug',
   title: 'title',
   location: 'location',
   publishedAt: 'publishedAt'
@@ -127,6 +129,11 @@ exports.Prisma.EventsScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 

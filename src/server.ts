@@ -1,15 +1,22 @@
 import express, { json, NextFunction, Request, Response } from 'express'
 import 'dotenv/config'
 
-import { createEventRouter } from './routes/create-event'
 import { getEventsRouter } from './routes/get-events'
+import { createEventRouter } from './routes/create-event'
+import { getEventBySlugRouter } from './routes/get-event-by-slug'
 
-import { AppError } from './utils/app-errors'
+import { AppError } from './exceptions/app-errors'
+import { deleteEventRouter } from './routes/delete-event'
 
 const server = express()
 server.use(json())
 
-server.use(createEventRouter, getEventsRouter)
+server.use(
+  createEventRouter,
+  getEventsRouter,
+  getEventBySlugRouter,
+  deleteEventRouter,
+)
 
 server.use(
   (
