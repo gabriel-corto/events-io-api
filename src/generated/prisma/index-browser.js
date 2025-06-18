@@ -123,7 +123,25 @@ exports.Prisma.EventsScalarFieldEnum = {
   slug: 'slug',
   title: 'title',
   location: 'location',
+  cover: 'cover',
+  date: 'date',
   publishedAt: 'publishedAt'
+};
+
+exports.Prisma.TicketsScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  quantity: 'quantity',
+  location: 'location',
+  appliedAt: 'appliedAt'
+};
+
+exports.Prisma.UsersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password'
 };
 
 exports.Prisma.SortOrder = {
@@ -138,7 +156,9 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Events: 'Events'
+  Events: 'Events',
+  Tickets: 'Tickets',
+  Users: 'Users'
 };
 
 /**

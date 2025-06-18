@@ -9,23 +9,34 @@ datasource db {
 }
 
 model Events {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   ticket      Int?
-  slug        String?  @unique
+  slug        String?   @unique
   title       String
   location    String
-  publishedAt DateTime @default(now())
+  cover       String?
+  date        DateTime?
+  publishedAt DateTime  @default(now())
 
   @@map("events")
 }
 
 model Tickets {
-  id        Int      @id @default(autoincrement())
-  slug      String?  @unique
-  name      String
-  quantity  Int
-  location  String
-  appliedAt DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  slug       String?  @unique
+  title      String
+  quantity   Int
+  location   String
+  applied_at DateTime @default(now())
 
   @@map("tickets")
+}
+
+model Users {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  @@map("users")
 }

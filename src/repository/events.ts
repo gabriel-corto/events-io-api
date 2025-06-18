@@ -7,6 +7,7 @@ export async function createEventRepository({
   title,
   location,
   ticket,
+  cover,
 }: EventData) {
   const slug = generateSlug(title)
 
@@ -16,6 +17,7 @@ export async function createEventRepository({
       location,
       slug,
       ticket,
+      cover,
     },
   })
 }

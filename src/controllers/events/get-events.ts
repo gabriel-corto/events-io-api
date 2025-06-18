@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-
 import { prisma } from '@/lib/prisma'
 
 export async function GetEventController(req: Request, res: Response) {

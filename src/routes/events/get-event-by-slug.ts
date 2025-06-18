@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { GetEventBySlugController } from '@/controllers/get-event-by-slug'
+import { GetEventBySlugController } from '@/controllers/events/get-event-by-slug'
 
 export const getEventBySlugRouter = Router()
 
