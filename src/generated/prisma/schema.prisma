@@ -17,17 +17,20 @@ model Events {
   cover       String?
   date        DateTime?
   publishedAt DateTime  @default(now())
+  Tickets     Tickets[]
 
   @@map("events")
 }
 
 model Tickets {
-  id        Int      @id @default(autoincrement())
-  slug      String?  @unique
-  name      String
-  quantity  Int
-  location  String
-  appliedAt DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  slug       String?  @unique
+  event      Events   @relation(fields: [eventsId], references: [id])
+  eventsId   Int
+  applied_at DateTime @default(now())
+
+  user    Users @relation(fields: [usersId], references: [id])
+  usersId Int
 
   @@map("tickets")
 }
@@ -37,6 +40,8 @@ model Users {
   name     String
   email    String @unique
   password String
+
+  tickets Tickets[]
 
   @@map("users")
 }

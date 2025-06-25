@@ -1,6 +1,6 @@
+import { createEventRepository } from '../../repository/events/create-event.js'
+import { createEventSchema, EventData } from '../../validators/create-events.js'
 import { Request, Response } from 'express'
-import { createEventSchema, EventData } from '@/validators/create-events'
-import { createEventRepository } from '@/repository/events'
 
 export async function CreateEventController(req: Request, res: Response) {
   const parsedBody: EventData = {
@@ -20,7 +20,7 @@ export async function CreateEventController(req: Request, res: Response) {
   }
 
   const { title, location, ticket } = validated.data
-  const cover = req.file?.path
+  const cover = req.file?.originalname
 
   try {
     const events = await createEventRepository({
@@ -35,6 +35,7 @@ export async function CreateEventController(req: Request, res: Response) {
       content: events,
     })
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       success: false,
       message: 'Erro ao criar evento!',

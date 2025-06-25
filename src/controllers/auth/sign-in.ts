@@ -1,16 +1,11 @@
 import { Request, Response } from 'express'
 
-import { prisma } from '@/lib/prisma'
-import { signInSchema } from '@/validators/sign-in'
+import { signInSchema } from '../../validators/sign-in.js'
+import { signInRepository } from '../../repository/auth/sign-in.js'
 
 export async function SignInController(req: Request, res: Response) {
   const { email, password } = signInSchema.parse(req.body)
-
-  const user = await prisma.users.findUnique({
-    where: {
-      email,
-    },
-  })
+  const user = await signInRepository({ email })
 
   if (!user) {
     res.status(404).json({
@@ -20,9 +15,10 @@ export async function SignInController(req: Request, res: Response) {
   }
 
   if (user.email === email && user.password === password) {
-    res.status(201).json({
+    res.status(200).json({
       success: true,
-      content: user.email,
+      user,
+      message: 'Login efectuado com sucesso!',
     })
   } else {
     res.status(400).json({

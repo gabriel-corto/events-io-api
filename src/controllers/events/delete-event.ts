@@ -1,4 +1,5 @@
-import { prisma } from '@/lib/prisma'
+import { deleteEventRepository } from '../../repository/events/delete-event.js'
+import { getEventBySlugRepository } from '../../repository/events/get-event-by-slug.js'
 import { Request, Response } from 'express'
 
 export async function DeleteEventController(req: Request, res: Response) {
@@ -7,23 +8,27 @@ export async function DeleteEventController(req: Request, res: Response) {
   if (!slug) {
     res.status(400).json({
       success: false,
-      message: 'Slug is required',
+      message: 'Adcione um slug!',
     })
   }
 
+  const event = await getEventBySlugRepository({ slug })
+
+  if (!event) {
+    res.status(404).json({ message: 'Evento não encontrado!' })
+
+    return
+  }
+
   try {
-    await prisma.events.delete({
-      where: {
-        slug,
-      },
-    })
+    await deleteEventRepository({ slug })
 
     res.status(200).json({
       success: true,
       content: null,
-      message: 'Event deleted successfully',
+      message: 'Evento eliminado com sucesso!',
     })
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' })
+    res.status(500).json({ message: 'Erro no servidor!' })
   }
 }

@@ -1,8 +1,8 @@
-import { prisma } from '@/lib/prisma'
-import { SignUpData } from '@/validators/sign-up'
+import { prisma } from '../../lib/prisma.js'
+import { SignUpData } from '../../validators/sign-up.js'
 
 export async function signUpRepository({ name, email, password }: SignUpData) {
-  return await prisma.users.create({
+  await prisma.users.create({
     data: {
       email,
       name,

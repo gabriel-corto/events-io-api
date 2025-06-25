@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { DeleteEventController } from '@/controllers/events/delete-event'
+import { DeleteEventController } from '../../controllers/events/delete-event.js'
 
 export const deleteEventRouter = Router()
 

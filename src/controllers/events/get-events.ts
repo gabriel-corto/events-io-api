@@ -1,18 +1,27 @@
 import { Request, Response } from 'express'
-import { prisma } from '@/lib/prisma'
+import { getEventsRepository } from '../../repository/events/get-events.js'
 
 export async function GetEventController(req: Request, res: Response) {
-  const events = await prisma.events.findMany()
+  try {
+    const events = await getEventsRepository()
 
-  if (!events || events.length === 0) {
-    res.status(404).json({
+    if (!events || events.length === 0) {
+      res.status(404).json({
+        success: false,
+        message: 'No events founded!',
+      })
+
+      return
+    }
+
+    res.status(200).json({
+      success: true,
+      content: events,
+    })
+  } catch {
+    res.status(500).json({
       success: false,
-      message: 'No events found.',
+      message: 'Server error!',
     })
   }
-
-  res.status(200).json({
-    success: true,
-    content: events,
-  })
 }
